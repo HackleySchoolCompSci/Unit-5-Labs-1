@@ -1,0 +1,150 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: 'ManipulatingStrings: Find middle 3'
+      id: manipulatingstrings-find-middle-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'ManipulatingStrings: Find middle 3'
+        setup-command: mvn compile
+        command: mvn -Dtest=ManipulatingStringsTest#testMiddle3 test
+        timeout: 3
+        max-score: 1
+    - name: 'ManipulatingStrings: Switch phrase'
+      id: manipulatingstrings-switch-phrase
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'ManipulatingStrings: Switch phrase'
+        setup-command: mvn compile
+        command: mvn -Dtest=ManipulatingStringsTest#testSwitchPhrase test
+        timeout: 3
+        max-score: 1
+    - name: 'ManipulatingStrings: Replace blanks'
+      id: manipulatingstrings-replace-blanks
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'ManipulatingStrings: Replace blanks'
+        setup-command: mvn compile
+        command: mvn -Dtest=ManipulatingStringsTest#testReplaceBlanks test
+        timeout: 3
+        max-score: 1
+    - name: 'ManipulatingStrings: Print phrase info'
+      id: manipulatingstrings-print-phrase-info
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'ManipulatingStrings: Print phrase info'
+        setup-command: mvn compile
+        command: mvn -Dtest=ManipulatingStringsTest#testPrintPhraseInfo test
+        timeout: 3
+        max-score: 1
+    - name: 'ManipulatingStrings: City/state string and prints'
+      id: manipulatingstrings-city-state-string-and-prints
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'ManipulatingStrings: City/state string and prints'
+        setup-command: mvn compile
+        command: mvn -Dtest=ManipulatingStringsTest#testMain test
+        timeout: 3
+        max-score: 1
+    - name: 'Dice: Assigning dice'
+      id: dice-assigning-dice
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'Dice: Assigning dice'
+        setup-command: mvn compile
+        command: mvn -Dtest=DiceTest#testRollingDice test
+        timeout: 3
+        max-score: 1
+    - name: 'Dice: Main'
+      id: dice-main
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'Dice: Main'
+        setup-command: mvn compile
+        command: mvn -Dtest=DiceTest#testMain test
+        timeout: 3
+        max-score: 1
+    - name: 'Distance: Compute Distance'
+      id: distance-compute-distance
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'Distance: Compute Distance'
+        setup-command: mvn compile
+        command: mvn -Dtest=DistanceTest#testComputeDistance test
+        timeout: 3
+        max-score: 1
+    - name: 'Distance: MainCase1'
+      id: distance-maincase1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'Distance: MainCase1'
+        setup-command: mvn compile
+        command: mvn -Dtest=DistanceTest#testMainCase1 test
+        timeout: 3
+        max-score: 1
+    - name: 'Distance: MainCase2'
+      id: distance-maincase2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'Distance: MainCase2'
+        setup-command: mvn compile
+        command: mvn -Dtest=DistanceTest#testMainCase2 test
+        timeout: 3
+        max-score: 1
+    - name: 'RightTriangle: Compute Hypotenuse'
+      id: righttriangle-compute-hypotenuse
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'RightTriangle: Compute Hypotenuse'
+        setup-command: mvn compile
+        command: mvn -Dtest=RightTriangleTest#testComputeHypotenuse test
+        timeout: 3
+        max-score: 1
+    - name: 'RightTriangle: Main'
+      id: righttriangle-main
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'RightTriangle: Main'
+        setup-command: mvn compile
+        command: mvn -Dtest=RightTriangleTest#testMain test
+        timeout: 3
+        max-score: 1
+    - name: 'LuckyNumbers: Main'
+      id: luckynumbers-main
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: 'LuckyNumbers: Main'
+        setup-command: mvn compile
+        command: mvn -Dtest=LuckyNumbersTest#testMain test
+        timeout: 3
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        MANIPULATINGSTRINGS-FIND-MIDDLE-3_RESULTS: "${{steps.manipulatingstrings-find-middle-3.outputs.result}}"
+        MANIPULATINGSTRINGS-SWITCH-PHRASE_RESULTS: "${{steps.manipulatingstrings-switch-phrase.outputs.result}}"
+        MANIPULATINGSTRINGS-REPLACE-BLANKS_RESULTS: "${{steps.manipulatingstrings-replace-blanks.outputs.result}}"
+        MANIPULATINGSTRINGS-PRINT-PHRASE-INFO_RESULTS: "${{steps.manipulatingstrings-print-phrase-info.outputs.result}}"
+        MANIPULATINGSTRINGS-CITY-STATE-STRING-AND-PRINTS_RESULTS: "${{steps.manipulatingstrings-city-state-string-and-prints.outputs.result}}"
+        DICE-ASSIGNING-DICE_RESULTS: "${{steps.dice-assigning-dice.outputs.result}}"
+        DICE-MAIN_RESULTS: "${{steps.dice-main.outputs.result}}"
+        DISTANCE-COMPUTE-DISTANCE_RESULTS: "${{steps.distance-compute-distance.outputs.result}}"
+        DISTANCE-MAINCASE1_RESULTS: "${{steps.distance-maincase1.outputs.result}}"
+        DISTANCE-MAINCASE2_RESULTS: "${{steps.distance-maincase2.outputs.result}}"
+        RIGHTTRIANGLE-COMPUTE-HYPOTENUSE_RESULTS: "${{steps.righttriangle-compute-hypotenuse.outputs.result}}"
+        RIGHTTRIANGLE-MAIN_RESULTS: "${{steps.righttriangle-main.outputs.result}}"
+        LUCKYNUMBERS-MAIN_RESULTS: "${{steps.luckynumbers-main.outputs.result}}"
+      with:
+        runners: manipulatingstrings-find-middle-3,manipulatingstrings-switch-phrase,manipulatingstrings-replace-blanks,manipulatingstrings-print-phrase-info,manipulatingstrings-city-state-string-and-prints,dice-assigning-dice,dice-main,distance-compute-distance,distance-maincase1,distance-maincase2,righttriangle-compute-hypotenuse,righttriangle-main,luckynumbers-main
