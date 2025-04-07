@@ -9,6 +9,8 @@ public class Student
     private double test1;
     private double test2;
 
+    Scanner scan = new Scanner(System.in);
+
     public Student(String studentName)
     {
         name = studentName;
@@ -16,21 +18,13 @@ public class Student
         test2 = 0;
     }
 
-    public void inputGrades()
+    public void inputGrades(Scanner scan)
     {
-        Scanner scan = new Scanner(System.in);
+        
         System.out.print("Enter " + name + "'s score for test 1: ");
-        while (!scan.hasNextDouble()) { // Validate input for test 1
-            System.out.println("Invalid input. Please enter a valid number.");
-            scan.next(); // Consume invalid input
-        }
         test1 = scan.nextDouble();
     
         System.out.print("Enter " + name + "'s score for test 2: ");
-        while (!scan.hasNextDouble()) { // Validate input for test 2
-            System.out.println("Invalid input. Please enter a valid number.");
-            scan.next(); // Consume invalid input
-        }
         test2 = scan.nextDouble();
     }
 
