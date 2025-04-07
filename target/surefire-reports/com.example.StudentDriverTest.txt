@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.StudentDriverTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.04 s <<< FAILURE! - in com.example.StudentDriverTest
-testMain  Time elapsed: 0.032 s  <<< ERROR!
-java.util.NoSuchElementException
-	at com.example.StudentDriverTest.testMain(StudentDriverTest.java:37)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s - in com.example.StudentDriverTest
