@@ -34,14 +34,14 @@ public class CoinBias
 
     public boolean isHeads()
     {
-	return (face == HEADS);
+	    return (face == HEADS);
     }
 
-   public double getBias()
+    public double getBias()
     {
-	return bias;
+        return bias;
     }
-
+    
     public String toString()
     {
 	String faceName;
